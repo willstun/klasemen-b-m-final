@@ -1,0 +1,28 @@
+{
+  "name": "lombarog-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/server.js",
+    "start": "node src/server.js",
+    "setup": "node scripts/setup-database.js && npx prisma generate && npx prisma db push",
+    "seed": "node prisma/seed.js",
+    "init": "npm run setup && npm run seed"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.0.0",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.0",
+    "express": "^4.21.0",
+    "jose": "^6.0.0",
+    "multer": "^1.4.5-lts.1",
+    "socket.io": "^4.8.0"
+  },
+  "devDependencies": {
+    "mysql2": "^3.20.0",
+    "prisma": "^6.0.0"
+  }
+}

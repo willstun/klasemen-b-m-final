@@ -1,0 +1,54 @@
+═══════════════════════════════════════════════════
+  PRODUCTION READINESS CHECKLIST
+═══════════════════════════════════════════════════
+
+✅ Yang sudah siap:
+- Auth system (JWT httpOnly cookie, bcrypt 12 rounds, login rate limiting 5x/15min)
+- API security (CORS, apiGuard, input validation, security headers, Permissions-Policy)
+- WebSocket real-time updates (Socket.io, room-based, type validation)
+- Image upload system (path traversal protection, folder validation, resolve check)
+- Database schema (proper indexes, cascade delete)
+- Theme system (5 color frontend picker)
+- NGINX config (3 subdomain, SSL, caching, admin API blocking)
+- PM2 deployment (3 processes, auto-restart)
+- Error handling (404, 500, error boundary)
+- Bulk operations ($transaction for atomicity)
+
+═══════════════════════════════════════════════════
+
+📋 Checklist sebelum deploy:
+
+Backend .env:
+  [ ] NODE_ENV=production
+  [ ] JWT_SECRET = random 32+ karakter
+  [ ] API_SECRET_VALUE = random 24+ karakter
+  [ ] ALLOWED_ORIGINS = domain production (https://month.xxx, https://week.xxx, https://dash.xxx)
+  [ ] DATABASE_URL = MySQL production (bukan root)
+  [ ] TRUST_PROXY=true
+
+Frontend .env:
+  [ ] NEXT_PUBLIC_API_URL = kosong (NGINX proxy)
+  [ ] NEXT_PUBLIC_SOCKET_URL = kosong (NGINX proxy)
+
+Admin Dashboard .env:
+  [ ] NEXT_PUBLIC_API_URL = kosong (NGINX proxy)
+  [ ] NEXT_PUBLIC_WEEKLY_URL = https://week.domain.com
+  [ ] NEXT_PUBLIC_MONTHLY_URL = https://month.domain.com
+
+Build & Deploy:
+  [ ] Frontend: npm run build berhasil
+  [ ] Admin: npm run build berhasil
+  [ ] DNS A record *.domain.com → IP VPS
+  [ ] SSL certificate aktif (certbot)
+  [ ] NGINX config: ganti domain.com → domain Anda
+  [ ] PM2 running 3 proses (api, frontend, admin)
+
+Verifikasi:
+  [ ] https://month.domain.com — halaman bulanan tampil
+  [ ] https://month.domain.com/tabel — tabel klasemen tampil
+  [ ] https://week.domain.com — halaman mingguan tampil
+  [ ] https://week.domain.com/tabel — tabel klasemen tampil
+  [ ] https://dash.domain.com — login admin tampil
+  [ ] Upload gambar berfungsi
+  [ ] Real-time WebSocket berfungsi
+  [ ] Console browser bersih (tidak ada error CORS/localhost)

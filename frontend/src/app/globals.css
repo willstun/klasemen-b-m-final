@@ -1,0 +1,80 @@
+@import "tailwindcss";
+
+@theme {
+  --font-poppins: 'Poppins', sans-serif;
+
+  --color-gold: #FFBB00;
+  --color-blur: #F71111;
+  --color-red-brand: #FF0F0F;
+  --color-red-dark: #A80000;
+  --color-green-brand: #22c55e;
+
+  --color-page-bg: #0a0a0a;
+  --color-page-gradient-start: #0a0a0a;
+  --color-page-gradient-mid: #260000;
+  --color-page-gradient-end: #0a0a0a;
+
+  --color-card-bg: #260000;
+  --color-table-border: #FFBB00;
+  --color-table-hover: rgba(255, 255, 255, 0.02);
+  --color-header-bg: transparent;
+
+  --color-text-primary: #ffffff;
+  --color-text-muted: #aaaaaa;
+
+  --color-status-done-bg: #260000;
+  --color-status-done-border: #A80000;
+  --color-status-done-text: #737373;
+
+  --color-dropdown-bg: #f3f4f6;
+  --color-dropdown-hover: #d1d5db;
+  --color-dropdown-text: #000000;
+
+  --color-filter-active-bg: #A80000;
+  --color-filter-active-border: #FFBB00;
+
+  --color-btn-bg: #A80000;
+  --color-btn-hover: #260000;
+}
+
+*,
+button,
+input,
+select,
+textarea,
+table,
+th,
+td,
+a {
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background: var(--color-page-bg);
+}
+
+.btn-solid {
+  background: var(--color-btn-bg);
+  transition: background 0.2s;
+}
+
+.btn-solid:hover {
+  background: var(--color-btn-hover);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s ease;
+}

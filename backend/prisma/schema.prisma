@@ -1,0 +1,123 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── User & Auth ────────────────────────────────────────
+model User {
+  id        Int           @id @default(autoincrement())
+  username  String        @unique
+  email     String?
+  password  String
+  avatarUrl String?       @db.Text
+  createdAt DateTime      @default(now())
+  logs      ActivityLog[]
+}
+
+model ActivityLog {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  username  String
+  action    String   @db.Text
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([createdAt])
+}
+
+// ─── Site Settings ──────────────────────────────────────
+model SiteSettings {
+  id            Int      @id @default(autoincrement())
+  pageKey       String   @unique
+  logoUrl       String?  @db.Text
+  faviconUrl    String?  @db.Text
+  backgroundUrl String?  @db.Text
+  bannerUrl     String?  @db.Text
+  promoUrl      String?  @db.Text
+  footerText    String?  @db.Text
+  whatsappLink  String?  @db.Text
+  telegramLink  String?  @db.Text
+  title1        String?  @db.Text
+  buttonText    String?
+  buttonLink    String?  @db.Text
+  title2        String?  @db.Text
+  title3        String?  @db.Text
+  title4        String?
+  rules         String?  @db.Text
+  title5        String?  @db.Text
+  banner2Url    String?  @db.Text
+  sectionOrder  String?  @db.Text  // JSON array of section IDs for drag & drop order
+  updatedAt     DateTime @updatedAt
+}
+
+// ─── Competition & Participants ─────────────────────────
+model Competition {
+  id           Int             @id @default(autoincrement())
+  name         String
+  type         CompetitionType
+  bannerUrl    String?         @db.Text
+  periode      String?
+  year         Int?
+  month        Int?
+  week         Int?
+  claimLink    String?         @db.Text
+  isActive     Boolean         @default(true)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
+  participants Participant[]
+
+  @@index([type, isActive])
+  @@index([type, year, month])
+  @@index([type, year, month, week])
+}
+
+model Participant {
+  id            Int         @id @default(autoincrement())
+  competitionId Int
+  rank          Int?
+  name          String
+  prize         String?
+  points        Decimal     @default(0) @db.Decimal(15, 2)
+  status        Status      @default(claim)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  competition   Competition @relation(fields: [competitionId], references: [id], onDelete: Cascade)
+
+  @@index([competitionId, points(sort: Desc)])
+}
+
+// ─── Prize Templates ────────────────────────────────────
+model PrizeTemplate {
+  id        Int             @id @default(autoincrement())
+  type      CompetitionType
+  rank      Int
+  name      String
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  @@unique([type, rank])
+  @@index([type, rank])
+}
+
+// ─── Enums ──────────────────────────────────────────────
+enum CompetitionType {
+  weekly
+  monthly
+}
+
+enum Status {
+  claim
+  selesai
+}
+
+// ─── Theme Settings ─────────────────────────────────────
+model ThemeSettings {
+  id        Int      @id @default(autoincrement())
+  target    String   @unique   // "frontend" or "admin"
+  colors    String   @db.Text  // JSON string of color variables
+  updatedAt DateTime @updatedAt
+}
