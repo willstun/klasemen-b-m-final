@@ -63,7 +63,7 @@ sudo mysql
 
 ```sql
 CREATE DATABASE leaderboard CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'lombarog'@'localhost' IDENTIFIED BY 'PASSWORD_KUAT_DISINI';
+CREATE USER 'lombarog'@'localhost' IDENTIFIED BY 'Tukangcepu889$';
 GRANT ALL PRIVILEGES ON leaderboard.* TO 'lombarog'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;

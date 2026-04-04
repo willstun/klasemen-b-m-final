@@ -58,7 +58,7 @@ export default function HomePage({ settings }) {
 
       {/* Info + Rules Section */}
       {(hasContent(s.title2) || hasContent(s.title3) || hasContent(s.title4) || rulesHtml) && (
-        <div className="bg-card-bg w-full min-h-80 lg:min-h-140 flex justify-center items-center -mt-4 lg:-mt-8 border-y border-red-brand relative py-8 lg:py-0 px-3 md:px-0">
+        <div className="bg-card-bg w-full flex justify-center items-center -mt-4 lg:-mt-8 border-y border-red-brand relative py-8 lg:py-6 px-3 md:px-0">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-red-brand/30 w-full lg:w-248.5 h-40 lg:h-66 rounded-[50%] blur-2xl"></div>
           <div className="max-w-[95%] lg:max-w-190 mx-auto bg-card-bg border border-red-brand rounded-[10px] p-3 lg:p-4 z-5">
             {hasContent(s.title2) && <h1 className="text-xs lg:text-base text-center font-semibold mb-3 lg:mb-5">{s.title2}</h1>}
