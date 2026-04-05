@@ -83,7 +83,7 @@ export default function PublicHeader({ settings, homeHref = "/" }) {
       </header>
 
       <nav className="md:hidden fixed bottom-0 left-0 right-0 z-9999 mx-5 mb-4">
-        <div className="flex items-center justify-around py-2 px-5 bg-blur/15 rounded-full backdrop-blur-xs border border-blur/50">
+        <div className="flex items-center justify-around py-2 px-5 rounded-full border-2 border-[#fa0505] bg-linear-to-b from-[#f60000] to-[#560000] shadow-[inset_0_0_3px_1px_#4a00000f,inset_0_1px_0_0_#ae000024,inset_0_0_0_2px_#77000036,3px_3px_2px_1px_rgba(0,0,0,0)]">
           {mobileNavItems.map((item) => <MobileNavLink key={item.label} item={item} />)}
         </div>
       </nav>
