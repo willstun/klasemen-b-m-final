@@ -15,11 +15,11 @@ export function usePageType() {
     return { pageKey: "bulanan", type: "monthly", isDev: true };
   }
 
-  // Production: detect from hostname
-  if (hostname.startsWith("week.") || hostname.startsWith("week-")) {
+  // Production: detect "week" anywhere in hostname
+  if (hostname.includes("week")) {
     return { pageKey: "mingguan", type: "weekly", isDev: false };
   }
 
-  // Default production: bulanan (termasuk domain mirror)
+  // Default production: bulanan (month.*, lomba0001.*, dll)
   return { pageKey: "bulanan", type: "monthly", isDev: false };
 }
